@@ -9,11 +9,23 @@ spring:
           uri: lb://patient-service
           predicates:
             - Path=/patients/**
+          filters:
+            - RewritePath=/patients(?<segment>/?.*), /patients/$\{segment}
+            - name: CircuitBreaker
+              args:
+                name: circuitBreakerInstance
+                fallbackUri: forward:/fallback/patients
 
         - id: practicien-service
           uri: lb://practicien-service
           predicates:
             - Path=/practiciens/**
+          filters:
+            - RewritePath=/practitioners(?<segment>/?.*), /practitioners/$\{segment}
+            - name: CircuitBreaker
+              args:
+                name: circuitBreakerInstance
+                fallbackUri: forward:/fallback/practitioners
 
 eureka:
   client:
