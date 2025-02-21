@@ -1,9 +1,12 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-service.default.svc.cluster.local:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    hostname: patient-service
 
 resilience4j:
   circuitbreaker:

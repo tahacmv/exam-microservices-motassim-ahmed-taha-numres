@@ -2,7 +2,7 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    service-url:
+      defaultZone: http://eureka-service.default.svc.cluster.local:8761/eureka/
   server:
     enable-self-preservation: false
-  instance:
-    hostname: localhost
